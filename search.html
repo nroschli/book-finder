@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Find Books | Book Finder</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="header-content">
+      <h1>📚 Book Finder</h1>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="search.html">Find Books</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <section style="text-align: center;">
+    <input type="text" id="searchInput" placeholder="Search books by title or author..." />
+    <button onclick="searchBooks()">Search</button>
+  </section>
+
+  <main id="resultsContainer"></main>
+
+  <section style="max-width: 600px; margin: 40px auto;">
+    <canvas id="authorChart" width="400" height="200"></canvas>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

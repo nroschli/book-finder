@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Book Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Shared Header -->
+  <header class="site-header">
+    <div class="header-content">
+      <h1>📚 Book Finder</h1>
+      <nav class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="search.html">Find Books</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main style="max-width: 700px; margin: 40px auto; text-align: center;">
+    <h2>Welcome</h2>
+    <p>Use the "Find Books" page to search and bookmark your favorite reads.</p>
+    <a href="search.html">
+      <button style="padding: 12px 24px; margin-top: 20px; font-size: 16px;">🔍 Start Searching</button>
+    </a>
+
+    <h2 style="margin-top: 50px;">🔖 Your Favorites</h2>
+    <div id="favoritesContainer"></div>
+  </main>
+
+  <script>
+  function loadFavorites() {
+    const container = document.getElementById('favoritesContainer');
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    container.innerHTML = '';
+
+    if (favorites.length === 0) {
+      container.innerHTML = "<p>No favorites yet. Go search and bookmark some books!</p>";
+      return;
+    }
+
+    favorites.forEach((book, index) => {
+      const div = document.createElement('div');
+      div.classList.add('book');
+      div.innerHTML = `
+        <h3>${book.title}</h3>
+        <p>Author: ${book.author}</p>
+        <a href="https://openlibrary.org${book.key}" target="_blank">📖 View on Open Library</a><br><br>
+        <button class="remove-btn" onclick="removeFromFavorites(${index})">🗑️ Remove</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function removeFromFavorites(index) {
+    const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+    favorites.splice(index, 1); // Remove the book at the given index
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+    loadFavorites(); // Refresh the list
+  }
+
+  window.onload = loadFavorites;
+</script>
+
+</body>
+</html>
